@@ -1,0 +1,24 @@
+{
+  "name": "starbs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "file-type": "^8.0.0",
+    "hashids": "^1.1.4",
+    "image-type": "^3.0.0",
+    "kew": "^0.7.0",
+    "parse-multipart": "^1.0.4",
+    "sha1": "^1.1.1",
+    "validator": "^10.4.0"
+  },
+  "devDependencies": {
+    "serverless-apigw-binary": "^0.4.4",
+    "serverless-apigwy-binary": "^0.1.0"
+  }
+}

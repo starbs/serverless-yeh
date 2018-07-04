@@ -1,0 +1,46 @@
+service: starbs
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: us-east-1
+  stage: prod
+  environment:
+    BUCKET: 'i.cwlf.uk'
+    URL: 'https://i.cwlf.uk/'
+  iamRoleStatements:
+    -  Effect: 'Allow'
+       Action:
+         - 's3:ListBucket'
+       Resource: 'arn:aws:s3:::i.cwlf.uk'
+    -  Effect: 'Allow'
+       Action:
+         - 's3:PutObject'
+         - 's3:PutObjectAcl'
+         - 's3:GetObject'
+       Resource: 'arn:aws:s3:::i.cwlf.uk/*'
+
+plugins:
+  - serverless-apigw-binary
+  - serverless-apigwy-binary
+
+package:
+  exclude:
+    - package.json
+    - .gitignore
+    - .git/**
+    - package-lock.json
+    - serverless.yml
+
+custom:
+  apigwBinary:
+    types:
+      - '*/*'
+functions:
+  yeh:
+    handler: handler.image
+    events:
+      - http:
+          path: /
+          method: post
+          contentHandling: CONVERT_TO_BINARY
