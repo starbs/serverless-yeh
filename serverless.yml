@@ -44,3 +44,8 @@ functions:
           path: /
           method: post
           contentHandling: CONVERT_TO_BINARY
+      ## this is a bad idea :)
+      #- http:
+      #    path: {proxy+}
+      #    method: get
+      #    contentHandling: CONVERT_TO_BINARY
