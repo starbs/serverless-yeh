@@ -41,10 +41,12 @@ module.exports.image = (event, context, callback) => {
     let b64 = Buffer.from(event.body, 'base64').toString()
     let data = Buffer.from(event.body, 'base64').toString('binary');
     let image = Buffer.from(data, 'binary');
-    if (event.headers['content-type'].split(';')[0] === 'multipart/form-data') {
-      let boundary = multipart.getBoundary(event.headers['content-type']);
-      let parts = multipart.Parse(bin, boundary);
-      image = parts[0]['data'];
+    if ("content-type" in event.headers) {
+      if (event.headers['content-type'].split(';')[0] === 'multipart/form-data') {
+        let boundary = multipart.getBoundary(event.headers['content-type']);
+        let parts = multipart.Parse(image, boundary);
+        image = parts[0]['data'];
+      }
     }
     let type = fileType(image);
     let imgStr = Buffer.from(event.body, 'base64').toString('ascii');
