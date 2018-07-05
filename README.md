@@ -45,6 +45,11 @@ Modify the configuration files in *'config'*, then follow the setup in ShareX De
 
 Sidenote: *We suggest configuring a keybind to upload your clipboard (Chip uses Ctrl-Shift-\\) this will allow you to copy and instantly upload any image*
 
+## Notes
+
+- The maximum payload to API Gateway is 10MB and 6MB to Lambda, so our uploads are limited to 6MB.
+- I suggest putting a rate limiting WAF on the CloudFront distribution to prevent cost attacks, the minimum rate-limit in WAF is 2000 requests every 5 minutes (more than enough). If an actor decides to try and attack your API and hit the maximum rate limits for 24 hours, it'd only cost around $6; while this is an unlikely scenario, if you would like to protect your API, keys can be enabled for API Gateway endpoints.
+
 ## License
 
 Starbs Yeh - Serverless Edition is licensed under [The MIT License (MIT)](LICENSE).
